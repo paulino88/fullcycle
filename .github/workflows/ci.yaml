@@ -1,5 +1,8 @@
 name: ci-golang-workflow
-on: [push]
+on:
+  push:
+    branches:
+      - cicdgithub
 
 jobs:
   check-application:
