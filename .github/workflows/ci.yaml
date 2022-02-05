@@ -26,7 +26,7 @@ jobs:
       
       - name: Build and push
         id: docker_build # Key para utilizar em outra step
-        uses: docker/build-push-action@2
+        uses: docker/build-push-action@v2
         with:
           push: false # Por hora não quer o push, apenas o build da imagem
           tags: paulino88/fullcycle:latest
