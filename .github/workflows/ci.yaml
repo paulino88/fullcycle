@@ -4,13 +4,12 @@ on:
     branches:
       - cicdgithub
 
-strategy:
-  matrix:
-    go: ['1.14','1.15','1.16'] # Aqui colocamos as versoes de teste
-
 jobs:
   check-application:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go: ['1.14','1.15','1.16'] # Aqui colocamos as versoes de teste
     steps:
       - uses: actions/checkout@v2 # Atualiza os dados do repositorio para dentro do container
       - uses: actions/setup-go@v2 # Organiza os dados para rodar o golang
