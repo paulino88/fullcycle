@@ -7,13 +7,35 @@ on:
 jobs:
   check-application:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go: ['1.14','1.15','1.16'] # Aqui colocamos as versoes de teste
+    #strategy:
+    #  matrix:
+    #    go: ['1.14','1.15','1.16'] # Aqui colocamos as versoes de teste
     steps:
       - uses: actions/checkout@v2 # Atualiza os dados do repositorio para dentro do container
       - uses: actions/setup-go@v2 # Organiza os dados para rodar o golang
         with:
-          go-version: ${{ matrix.go }} # colocamos matrix.key que no nosso caso foi escolhido a matrix go.
+          go-version: 1.15
       #- run: go test
       - run: go run ./cicdgithub/math.go
+      
+      - name: Set up QEMU # Construindo o container
+        uses: docker/setup-qemu-action@v1
+      
+      - name: Set up Docker Buildx # Aqui vamos criar a imagem
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Build and push
+        id: docker_build # Key para utilizar em outra step
+        uses: docker/build-push-action@2
+        with:
+          push: false # Por hora não quer o push, apenas o build da imagem
+          tags: paulino88/fullcycle:latest
+          build-args:
+            arg1=value1
+            arg2=value2
+
+#      - name: Login to DockerHub
+#        uses: docker/login-action@v1 
+#        with:
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
