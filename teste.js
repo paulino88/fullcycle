@@ -1,2 +1,0 @@
-teste plugin conventional
-testando
