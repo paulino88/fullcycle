@@ -1,0 +1,6 @@
+mode: set
+there/sum.go:5.13,7.2 1 0
+there/sum.go:9.28,11.2 1 1
+there/sum.go:13.28,15.2 1 0
+there/sum.go:17.30,19.2 1 0
+there/sum.go:21.25,23.2 1 0
