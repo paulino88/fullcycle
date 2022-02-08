@@ -2,26 +2,23 @@ name: ci-golang-workflow
 on:
   push:
     branches:
-      - cicdgithub
+      - sonarqube
 
 jobs:
-  check-application:
+  run-ci:
     runs-on: ubuntu-latest
-    #strategy:
-    #  matrix:
-    #    go: ['1.14','1.15','1.16'] # Aqui colocamos as versoes de teste
     steps:
-      - uses: actions/checkout@v2 # Atualiza os dados do repositorio para dentro do container
-      - uses: actions/setup-go@v2 # Organiza os dados para rodar o golang
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
         with:
           go-version: 1.15
-      #- run: go test
+      - run: go test -coverprofile=coverage.out
       - run: go run ./cicdgithub/math.go
       
-      - name: Set up QEMU # Construindo o container
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       
-      - name: Set up Docker Buildx # Aqui vamos criar a imagem
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       
       - name: Login to DockerHub
@@ -31,11 +28,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
-        id: docker_build # Key para utilizar em outra step
+        id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: paulino88/img-private:latest
+          tags: paulino88/img-private:1.0.0-go
           build-args:
             arg1=value1
             arg2=value2
