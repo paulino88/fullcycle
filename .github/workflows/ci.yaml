@@ -1,8 +1,9 @@
-name: ci-golang-workflow
+---
+name: ci-sonarcloud
 on:
   push:
     branches:
-      - sonarqube
+      - sonarcloudci
 
 jobs:
   run-ci:
@@ -13,7 +14,7 @@ jobs:
         with:
           go-version: 1.15
       - run: go test -coverprofile=coverage.out
-      - run: go run ./cicdgithub/math.go
+      - run: go run math.go
       
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -36,4 +37,3 @@ jobs:
           build-args:
             arg1=value1
             arg2=value2
-
