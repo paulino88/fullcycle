@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - sonarcloudci
+
+  pull_request:
+    branches:
       - develop
 
 jobs:
@@ -15,7 +18,6 @@ jobs:
         with:
           go-version: 1.15
       - run: go test -coverprofile=coverage.out
-#      - run: go run sum.go
       
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
