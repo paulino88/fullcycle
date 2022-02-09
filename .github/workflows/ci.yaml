@@ -3,7 +3,7 @@ name: ci-sonarcloud
 on:
   push:
     branches:
-      - sonarcloudci
+      - sonarcloud
 
   pull_request:
     branches:
