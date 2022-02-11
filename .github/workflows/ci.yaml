@@ -1,9 +1,9 @@
 ---
 name: ci-sonarcloud
 on:
-  push:
-    branches:
-      - sonarcloud2
+#  push:
+#    branches:
+#      - sonarcloud
 
   pull_request:
     branches:
@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: paulino88/img-private:1.0.0-go
+          tags: paulino88/img-private:2.0.0-go
           build-args:
             arg1=value1
             arg2=value2
